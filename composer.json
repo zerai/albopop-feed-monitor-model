@@ -2,6 +2,7 @@
     "name": "zerai/albopop-feed-monitor-model",
     "description": "AlboPop feed model prototype",
     "type": "project",
+    "license": "MIT",
     "authors": [
         {
             "name": "zero",
