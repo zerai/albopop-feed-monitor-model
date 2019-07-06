@@ -1,0 +1,4 @@
+/.idea/
+/vendor/
+/extra/park/
+.php_cs.cache

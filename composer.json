@@ -1,0 +1,40 @@
+{
+    "name": "zerai/albopop-feed-monitor-model",
+    "description": "AlboPop feed model prototype",
+    "type": "project",
+    "authors": [
+        {
+            "name": "zero",
+            "email": "teclaizerai@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2",
+        "debril/feed-io": "^4.3",
+        "ramsey/uuid": "^3.8"
+    },
+    "require-dev": {
+        "behat/behat": "^3.5",
+        "friendsofphp/php-cs-fixer": "^2.15",
+        "phpstan/phpstan": "^0.11.8",
+        "phpunit/phpunit": "6.5",
+        "prolic/fpp": "dev-master"
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Core\\Tests\\": "core/tests/"
+        }
+    }
+}
