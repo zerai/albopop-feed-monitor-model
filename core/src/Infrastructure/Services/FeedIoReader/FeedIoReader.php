@@ -69,8 +69,8 @@ class FeedIoReader implements RssReaderInterface
      */
     public function readRss()
     {
-        //TODO trow exception if this->targetUrl null|empty
         return $this->feedIo->read($this->targetUrl);
     }
+
 
 }

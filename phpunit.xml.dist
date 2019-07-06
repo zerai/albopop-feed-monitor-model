@@ -16,7 +16,7 @@
 
     <testsuites>
         <testsuite name="Project Test Suite">
-            <directory>tests</directory>
+            <directory>core/tests</directory>
 
         </testsuite>
     </testsuites>
@@ -27,14 +27,10 @@
             <exclude>
                 <directory>src/Migrations/</directory>
                 <file>src/Kernel.php</file>
-
-                <directory>core/IngestionGazzetta/src/Infrastructure/Persistence/Doctrine/config/Type/</directory>
-
             </exclude>
         </whitelist>
     </filter>
 
     <listeners>
-        <!-- <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" /> -->
     </listeners>
 </phpunit>
