@@ -79,4 +79,18 @@ class FeedIoReaderTest extends TestCase
         self::assertFalse($readerResult->httpStatus());
         self::assertNotNull($readerResult->httpError());
     }
+
+
+    /** @test */
+    public function it_handle_http_exception_in_response(): void
+    {
+        self::markTestSkipped('rimuover in seguito: usare mock nella risposta http');
+        $rssReader = new FeedIoReader('http://dev.albopop.it/comune/agira/');
+
+        $readerResult = $rssReader->readRss();
+
+        self::assertFalse($readerResult->httpStatus());
+        self::assertNotNull($readerResult->httpError());
+        //var_dump($readerResult->httpError());
+    }
 }

@@ -1,4 +1,4 @@
-# Modello codice e prototizzazione per AlboPOP Monitoring application
+# Modello codice e prototipizzazione per AlboPOP Monitoring application
 
 
 Questo repository contiene solo il codice base (Domain Model) di AlboX (nome fittizio).

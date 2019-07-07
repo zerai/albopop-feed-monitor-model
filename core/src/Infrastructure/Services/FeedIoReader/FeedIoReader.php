@@ -42,9 +42,9 @@ class FeedIoReader implements RssReaderInterface
 
         $downloadedFeeds = $this->readRss();
 
-        $rssReaderResult = $this->resultTrasformer($downloadedFeeds);
+       // $rssReaderResult = $this->resultTrasformer($downloadedFeeds);
 
-        return $rssReaderResult;
+        return $downloadedFeeds;
 
     }
 
