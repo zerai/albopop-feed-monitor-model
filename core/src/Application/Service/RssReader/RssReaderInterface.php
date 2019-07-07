@@ -6,5 +6,5 @@ namespace Core\Application\Service\RssReader;
 
 interface RssReaderInterface
 {
-    public function execute(): array;
+    public function execute(): RssReaderResultInterface;
 }

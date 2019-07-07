@@ -15,19 +15,19 @@ class RssReaderResultTest extends TestCase
     /** @test */
     public function it_can_be_created(): void
     {
-        $rssReaderResult = new RssReaderResult(200);
+        $rssReaderResult = new RssReaderResult(true);
 
         self::assertInstanceOf(RssReaderResultInterface::class, $rssReaderResult);
     }
 
 
     /** @test */
-    public function it_return_http_status_code(): void
+    public function it_return_http_status(): void
     {
-        $httpStatusCode = 404;
+        $httpStatus = true;
 
-        $rssReaderResult = new RssReaderResult($httpStatusCode);
+        $rssReaderResult = new RssReaderResult($httpStatus);
 
-        self::assertEquals($httpStatusCode, $rssReaderResult->httpStatusCode());
+        self::assertEquals($httpStatus, $rssReaderResult->httpStatus());
     }
 }

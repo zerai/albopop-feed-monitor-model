@@ -7,7 +7,7 @@ namespace Core\Application\Service\RssReader;
 
 interface RssReaderResultInterface
 {
-    public function httpStatusCode(): int;
+    public function httpStatus(): bool;
 
-
+    public function httpError(): string;
 }
