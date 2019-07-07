@@ -67,4 +67,16 @@ class FeedIoReaderTest extends TestCase
 
         $rssReader->execute();
     }
+
+
+    /** @test */
+    public function it_handle_http_exception(): void
+    {
+        $rssReader = new FeedIoReader('http://feeds.ricostruzionetrasparente.it/albi_pretori/Muccia_feed.xmll');
+
+        $readerResult = $rssReader->readRss();
+
+        self::assertFalse($readerResult->httpStatus());
+        self::assertNotNull($readerResult->httpError());
+    }
 }

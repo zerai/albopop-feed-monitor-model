@@ -5,7 +5,11 @@ namespace Core\Infrastructure\Services\FeedIoReader;
 
 
 use Core\Application\Service\RssReader\RssReaderInterface;
+use Core\Application\Service\RssReader\RssReaderResult;
+use Core\Application\Service\RssReader\RssReaderResultInterface;
 use FeedIo\FeedIo;
+use FeedIo\Reader\ReadErrorException;
+use FeedIo\Reader\Result;
 use InvalidArgumentException;
 
 class FeedIoReader implements RssReaderInterface
@@ -30,7 +34,7 @@ class FeedIoReader implements RssReaderInterface
     }
 
 
-    public function execute(): array
+    public function execute(): RssReaderResultInterface
     {
         if ($this->targetUrl === null) {
             throw new InvalidArgumentException('RssReaderService without target url.');
@@ -38,9 +42,9 @@ class FeedIoReader implements RssReaderInterface
 
         $downloadedFeeds = $this->readRss();
 
-        // TODO Define response object
+        $rssReaderResult = $this->resultTrasformer($downloadedFeeds);
 
-        return [];
+        return $rssReaderResult;
 
     }
 
@@ -64,13 +68,42 @@ class FeedIoReader implements RssReaderInterface
         return $this->targetUrl;
     }
 
-    /**
-     * @return \FeedIo\Reader\Result
-     */
+
     public function readRss()
     {
-        return $this->feedIo->read($this->targetUrl);
+        try {
+            $result = $this->feedIo->read($this->targetUrl);
+
+            $transformerResult = $this->resultTrasformer($result);
+
+            return $transformerResult;
+
+        } catch (ReadErrorException $exception) {
+
+            // TODO log in file?
+            // TODO put in STDOUT
+            //$this->logger->error('Error appear during user creation. Reason: ' . $exception->getMessage());
+            //echo 'Error ...... ';
+
+            $rssReaderResult = new RssReaderResult(false);
+            $rssReaderResult->setHttpError($exception->getMessage());
+
+            return $rssReaderResult;
+        }
     }
 
+
+    /**
+     * @param Result $result
+     * @return RssReaderResult
+     */
+    public function resultTrasformer(Result $result): RssReaderResult
+    {
+
+        //TODO remove param
+        $rssReaderResult = new RssReaderResult( true);
+
+        return $rssReaderResult;
+    }
 
 }

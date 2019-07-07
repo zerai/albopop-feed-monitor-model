@@ -7,22 +7,38 @@ namespace Core\Application\Service\RssReader;
 
 class RssReaderResult implements RssReaderResultInterface
 {
+    /** @var bool */
+    private $httpStatus;
 
-    /** @var int */
-    private $httpStatusCode;
+    /** @var string */
+    private $httpError;
+
 
     /**
      * RssReaderResult constructor.
-     * @param int $httpStatusCode
+     * @param bool $httpStatus
      */
-    public function __construct(int $httpStatusCode)
+    public function __construct( bool $httpStatus )
     {
-        $this->httpStatusCode = $httpStatusCode;
+        $this->httpStatus = $httpStatus;
     }
 
 
-    public function httpStatusCode(): int
+    public function httpStatus(): bool
     {
-        return $this->httpStatusCode;
+        return $this->httpStatus;
     }
+
+
+    public function setHttpError(string $httpError): void
+    {
+        $this->httpError = $httpError;
+    }
+
+
+    public function httpError(): string
+    {
+        return $this->httpError;
+    }
+
 }
