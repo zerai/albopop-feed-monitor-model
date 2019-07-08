@@ -17,6 +17,9 @@
     <testsuites>
         <testsuite name="Project Test Suite">
             <directory>core/tests</directory>
+        </testsuite>
+        <testsuite name="core">
+            <directory>albomon/core/tests</directory>
 
         </testsuite>
     </testsuites>
@@ -24,6 +27,7 @@
     <filter>
         <whitelist>
             <directory>core/src</directory>
+            <directory>albomon/core/src</directory>
             <exclude>
                 <directory>src/Migrations/</directory>
                 <file>src/Kernel.php</file>

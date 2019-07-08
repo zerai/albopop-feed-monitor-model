@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Core\Application\Service\RssReader;
+namespace Albomon\Core\Application\Service\RssReader;
 
-
+/**
+ * Class RssReaderResult.
+ */
 class RssReaderResult implements RssReaderResultInterface
 {
     /** @var bool */
@@ -13,32 +15,37 @@ class RssReaderResult implements RssReaderResultInterface
     /** @var string */
     private $httpError;
 
-
     /**
      * RssReaderResult constructor.
+     *
      * @param bool $httpStatus
      */
-    public function __construct( bool $httpStatus )
+    public function __construct(bool $httpStatus)
     {
         $this->httpStatus = $httpStatus;
     }
 
-
+    /**
+     * @return bool
+     */
     public function httpStatus(): bool
     {
         return $this->httpStatus;
     }
 
-
-    public function setHttpError(string $httpError): void
-    {
-        $this->httpError = $httpError;
-    }
-
-
+    /**
+     * @return string
+     */
     public function httpError(): string
     {
         return $this->httpError;
     }
 
+    /**
+     * @param string $httpError
+     */
+    public function setHttpError(string $httpError): void
+    {
+        $this->httpError = $httpError;
+    }
 }
