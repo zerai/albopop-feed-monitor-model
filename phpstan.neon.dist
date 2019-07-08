@@ -7,9 +7,10 @@ parameters:
     #autoload_files:
         #- bin/.phpunit/phpunit-6.5/vendor/autoload.php
     paths:
-        - core/src
-        - core/tests
-
+        #- core/src
+        #- core/tests
+        - albomon/core/src
+        - albomon/core/tests
     ignoreErrors:
         #- '##'
 
@@ -19,6 +20,8 @@ parameters:
         - '*/vendor/*'
         - '*/Spec/*'
         - '*/extra/*'
+        - '*/Infrastructure/Framework*'
+        - '*/Infrastructure/UI*'
 
         # REMOVE
         
