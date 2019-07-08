@@ -30,12 +30,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Core\\": "core/src/"
+            "Core\\": "core/src/",
+            "Albomon\\Core\\": "albomon/core/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Core\\Tests\\": "core/tests/"
+            "Core\\Tests\\": "core/tests/",
+            "Albomon\\Tests\\Core\\": "albomon/core/tests/"
         }
     }
 }
