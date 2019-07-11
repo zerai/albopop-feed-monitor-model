@@ -11,6 +11,8 @@ use PHPUnit\Framework\TestCase;
 
 class MonitorApplicationServiceTest extends TestCase
 {
+    private const FEED_URL = 'http://feeds.ricostruzionetrasparente.it/albi_pretori/Muccia_feed.xml';
+
     /** @var MonitorApplicationService */
     private $monitorApplicationService;
 
@@ -28,7 +30,7 @@ class MonitorApplicationServiceTest extends TestCase
     {
         $url = 'http://feeds.ricostruzionetrasparente.it/albi_pretori/Muccia_feed.xml';
 
-        $rssPositiveResult = new RssReaderResult(true);
+        $rssPositiveResult = new RssReaderResult(true, self::FEED_URL);
 
         $this->feedReader->method('execute')
             ->willReturn($rssPositiveResult);
@@ -45,7 +47,7 @@ class MonitorApplicationServiceTest extends TestCase
     {
         $url = 'http://feeds.xxxxxx.it/xxxxx/xxxxx.xml';
 
-        $rssNegativeResult = new RssReaderResult(false);
+        $rssNegativeResult = new RssReaderResult(false, self::FEED_URL);
         $rssNegativeResult->setHttpError('Not Found');
 
         $this->feedReader->method('execute')
@@ -62,17 +64,14 @@ class MonitorApplicationServiceTest extends TestCase
     public function it_can_check_a_multiple_albo(): void
     {
         $alboList = [
-            'http://feeds.ricostruzionetrasparente.it/albi_pretori/Muccia_feed.xml',
-            'http://feeds.ricostruzionetrasparente.it/albi_pretori/Muccia_feed.xml'
+            ['Muccia' => 'http://feeds.ricostruzionetrasparente.it/albi_pretori/Muccia_feed.xml'],
+            ['Muccia' => 'http://feeds.ricostruzionetrasparente.it/albi_pretori/Muccia_feed.xml'],
         ];
-
-        //$rssPositiveResult = new RssReaderResult(true);
 
         $this->feedReader->expects($this->exactly(2))->method('execute');
 
         $monitorResponse = $this->monitorApplicationService->checkAlboList($alboList);
 
-        self::assertInternalType("array", $monitorResponse);
+        self::assertInternalType('array', $monitorResponse);
     }
-
 }
