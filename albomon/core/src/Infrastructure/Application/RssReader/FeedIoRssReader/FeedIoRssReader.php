@@ -9,6 +9,7 @@ use Albomon\Core\Application\Service\RssReader\RssReaderResult;
 use Albomon\Core\Application\Service\RssReader\RssReaderResultInterface;
 use FeedIo\FeedIo;
 use FeedIo\Reader\ReadErrorException;
+use FeedIo\Reader\Result;
 use InvalidArgumentException;
 
 /**
@@ -67,19 +68,42 @@ class FeedIoRssReader implements RssReaderInterface
     private function readRss()
     {
         try {
+            // TODO rename this var
             $result = $this->feedIo->read($this->targetUrl);
 
-            $rssReaderResult = new RssReaderResult(true);
+            $rssReaderResult = new RssReaderResult(true, $this->targetUrl);
+
+            // TODO assign xml to result object
+            $rssReaderResult->setXmlDocument($this->getDomDocument($result));
+
+            // TODO assign lastFeedItemDate to result object
+            $rssReaderResult->setlastFeedItemDate($this->getLastFeedItemDate($result));
 
             return $rssReaderResult;
         } catch (ReadErrorException $exception) {
             // TODO log in file?
             //$this->logger->error('Error appear during user creation. Reason: ' . $exception->getMessage());
 
-            $rssReaderResult = new RssReaderResult(false);
+            $rssReaderResult = new RssReaderResult(false, $this->targetUrl);
             $rssReaderResult->setHttpError($exception->getMessage());
 
             return $rssReaderResult;
         }
+    }
+
+    private function getDomDocument(Result $rssReaderResult): ?\DOMDocument
+    {
+        if (!$rssReaderResult->getDocument()->isXml()) {
+            return null;
+        }
+
+        return $rssReaderResult->getDocument()->getDOMDocument();
+    }
+
+    private function getLastFeedItemDate(Result $rssReaderResult): \DateTime
+    {
+        // TODO check before
+
+        return $rssReaderResult->getFeed()->getLastModified();
     }
 }
